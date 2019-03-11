@@ -5,7 +5,8 @@ output: html_document
 
 ```{r setup, include=FALSE}
 Database <- read.table("Data/tree-moisture.txt", header = FALSE)
-names(Database) <- c("Species", "Branch/Species", "Branch_Locations", "Transpiration_Types", "Dry")
+Database
+names(Database) <- c("Species", "Branch_Species", "Branch_Locations", "Transpiration_Types", "Dry")
 
 
 Database$Species <- factor(c("Lobolly Pine","Shortleaf Pine", "Yellow Poplar","Red Gum"))
@@ -23,7 +24,18 @@ show()
 You can also embed plots, for example:
 
 ```{r pressure, echo=FALSE}
-plot(pressure)
+moisture.aov <- aov(Dry ~ Species*Branch_Locations, data=Database)
+summary(moisture.aov)
+coef(moisture.aov)
+options("contrasts")
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r pressure, echo=FALSE}
+interaction.plot(Database$Branch_Locations,Database$Species, Database$Dry)
+```
+
+```{r pressure, echo=FALSE}
+layout(matrix(1:4,ncol=2)) 
+plot(moisture.aov)
+```
