@@ -4,7 +4,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-Database <- read.table("Rendu1/tree-moisture.txt", header = FALSE)
+Database <- read.table("Data/tree-moisture.txt", header = FALSE)
 names(Database) <- c("Species", "Branch/Species", "Branch_Locations", "Transpiration_Types", "Dry")
 
 
